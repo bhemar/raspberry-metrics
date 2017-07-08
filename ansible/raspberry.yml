@@ -1,0 +1,14 @@
+- name: Install Node exporter service
+  hosts: hosts
+  roles:
+  - { role: 'node-exporter' }
+
+- name: Install Prometheus service
+  hosts: hosts
+  roles:
+  - { role: 'prometheus' }
+
+- name: Install Grafana service
+  hosts: hosts
+  roles:
+  - { role: 'grafana' }

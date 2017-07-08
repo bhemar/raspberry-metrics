@@ -1,0 +1,2 @@
+node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v0.14.0/node_exporter-0.14.0.linux-armv7.tar.gz
+node_exporter_filename: node_exporter-0.14.0.linux-armv7

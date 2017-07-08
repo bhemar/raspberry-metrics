@@ -1,0 +1,67 @@
+- name: Install package "adduser"
+  become: true
+  apt:
+    name: adduser
+    state: present
+
+- name: Install package "libfontconfig"
+  become: true
+  apt:
+    name: libfontconfig
+    state: present
+
+- name: Creates directory Grafana service
+  become: true
+  file:
+    path: "{{ grafana_install_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
+- stat:
+    path: "{{ grafana_install_path }}/{{ grafana_filename }}"
+  register: dest
+
+- name: Download Grafana package
+  get_url:
+    url: "{{ grafana_download_url }}"
+    dest: "{{ grafana_install_path }}/"
+  when: not dest.stat.exists
+
+- name: Install Grafana package
+  become: true
+  apt:
+    deb: "{{ grafana_install_path }}/{{ grafana_filename }}"
+  when: not dest.stat.exists
+
+- name: Creates directory for example dashboard
+  become: true
+  file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    owner: grafana
+    group: grafana
+    mode: 0744
+
+- name: Copy example Dashboard
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /var/lib/grafana/dashboards/{{ item }}
+  with_items:
+  - raspberry-metrics-dashboard.json
+
+- name: Copy Grafana config file
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /etc/grafana/grafana.ini
+  with_items:
+  - grafana.ini
+
+- name: Start Grafana
+  become: true
+  service:
+    name: grafana-server
+    state: started

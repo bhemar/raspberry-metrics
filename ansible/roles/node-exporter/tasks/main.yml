@@ -1,0 +1,38 @@
+- name: Creates directory Node exporter service
+  become: true
+  file:
+    path: "{{ node_exporter_install_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
+- stat:
+    path: "{{ node_exporter_install_path }}/{{ node_exporter_filename }}"
+  register: dest
+
+- name: Download and unarchive Node exporter package
+  unarchive:
+    src: "{{ node_exporter_download_url }}"
+    remote_src: True
+    dest: "{{ node_exporter_install_path }}/"
+  when: not dest.stat.exists
+
+- name: Copy Node exporter init script
+  become: true
+  template:
+    src: node.exporter.init.script.j2
+    dest: /etc/init.d/{{ node_exporter_service_name }}
+    mode: 0755
+  register: initscript
+
+- name: update-rc.d node-exporter
+  become: true
+  command: update-rc.d {{ node_exporter_service_name }} defaults
+  when: initscript.changed
+
+- name: Start Node exporter
+  become: true
+  service:
+    name: node-exporter
+    state: started

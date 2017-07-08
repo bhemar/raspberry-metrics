@@ -1,0 +1,44 @@
+- name: Creates directory Prometheus service
+  become: true
+  file:
+    path: "{{ prometheus_install_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
+- stat:
+    path: "{{ prometheus_install_path }}/{{ prometheus_filename }}"
+  register: dest
+
+- name: Download and unarchive Prometheus package
+  unarchive:
+    src: "{{ prometheus_download_url }}"
+    remote_src: True
+    dest: "{{ prometheus_install_path }}/"
+  when: not dest.stat.exists
+
+- name: Copy Prometheus config file
+  copy:
+    src: prometheus.yml
+    dest: "{{ prometheus_install_path }}/{{ prometheus_filename }}/prometheus.yml"
+    mode: 0755
+
+- name: Copy Prometheus init script
+  become: true
+  template:
+    src: prometheus.init.script.j2
+    dest: /etc/init.d/{{ prometheus_service_name }}
+    mode: 0755
+  register: initscript
+
+- name: update-rc.d prometheus
+  become: true
+  command: update-rc.d {{ prometheus_service_name }} defaults
+  when: initscript.changed
+
+- name: Start Prometheus
+  become: true
+  service:
+    name: prometheus
+    state: started
