@@ -33,7 +33,15 @@
   become: true
   apt:
     deb: "{{ grafana_install_path }}/{{ grafana_filename }}"
-  when: not dest.stat.exists
+
+- name: Configure prometheus data source
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /etc/grafana/provisioning/datasources/{{ item }}
+  with_items:
+  - prometheus.yaml
+  notify: Restart Grafana
 
 - name: Creates directory for example dashboard
   become: true
@@ -52,16 +60,26 @@
   with_items:
   - raspberry-metrics-dashboard.json
 
-- name: Copy Grafana config file
+- name: Configure dashoard provisioning
   become: true
   copy:
     src: "{{ item }}"
-    dest: /etc/grafana/grafana.ini
+    dest: /etc/grafana/provisioning/dashboards/{{ item }}
   with_items:
-  - grafana.ini
+  - dashboard-config.yaml
+  notify: Restart Grafana
+
+- name: Deamon reload
+  become: true
+  systemd:
+    name: grafana-server
+    daemon_reload: yes
+
+- meta: flush_handlers
 
 - name: Start Grafana
   become: true
-  service:
+  systemd:
     name: grafana-server
+    enabled: yes
     state: started

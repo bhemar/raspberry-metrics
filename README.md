@@ -7,11 +7,13 @@ Expose raspberry PI metrics using [Grafana](https://grafana.com/) and [Prometheu
 
 ## About ##
 
+Visualise your Raspberry PI metrics. Very easy installation - requires single command.
+
 This project contains [Ansible](https://www.ansible.com/) playbook which installs three services on Raspberry:
 
-* [Node exporter](https://github.com/prometheus/node_exporter) - expose Raspberry metrics (v0.14.0)
-* [Prometheus](https://prometheus.io/) - collect and store metrics (v1.7.1)
-* [Grafana](https://grafana.com/) - metrics visualization (v4.3.2)
+* [Node exporter](https://github.com/prometheus/node_exporter) - expose Raspberry metrics (v0.16.0)
+* [Prometheus](https://prometheus.io/) - collect and store metrics (v2.2.1)
+* [Grafana](https://grafana.com/) - metrics visualization (v5.1.3)
 
 ![Scheme](./preview/scheme.jpg)
 
@@ -49,16 +51,10 @@ Run Ansible playbook with SSH keys authentication:
     ansible-playbook raspberry.yml -i hosts -u pi
 ```
 
-### 3. Configure Grafana datasource ###
+### 3. Check metrics ###
 
 * Go to Grafana URL http://raspberry:3000/
 * login with admin/admin
-* add new Data Source:
-
-![DataSource](./preview/dataSource.jpg)
-
 * Click on "Raspberry metrics" dashboard:
 
 ![Dashboard](./preview/dashboard.png)
-
-That's it.
