@@ -11,9 +11,9 @@ Visualise your Raspberry PI metrics. Very easy installation - requires single co
 
 This project contains [Ansible](https://www.ansible.com/) playbook which installs three services on Raspberry:
 
-* [Node exporter](https://github.com/prometheus/node_exporter) - expose Raspberry metrics (v0.16.0)
-* [Prometheus](https://prometheus.io/) - collect and store metrics (v2.2.1)
-* [Grafana](https://grafana.com/) - metrics visualization (v5.1.3)
+* [Node exporter](https://github.com/prometheus/node_exporter) - expose Raspberry metrics (v0.18.1)
+* [Prometheus](https://prometheus.io/) - collect and store metrics (v2.11.1)
+* [Grafana](https://grafana.com/) - metrics visualization (v5.1.4)
 
 ![Scheme](./preview/scheme.jpg)
 
@@ -41,14 +41,14 @@ Edit file **ansible/hosts** and set Raspberry IP address.
 Run Ansible playbook with password authentication:
 ```
     cd ansible/
-    ansible-playbook raspberry.yml -i hosts -u pi -k -K
+    ansible-playbook raspberry.yml -i hosts -u pi -D -k -K
 ```
 
-Run Ansible playbook with SSH keys authentication:
+Or run Ansible playbook with SSH keys authentication:
 
 ```
     cd ansible/
-    ansible-playbook raspberry.yml -i hosts -u pi
+    ansible-playbook raspberry.yml -i hosts -u pi -D
 ```
 
 ### 3. Check metrics ###

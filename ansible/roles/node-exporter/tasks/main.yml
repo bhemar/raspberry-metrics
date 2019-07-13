@@ -7,6 +7,15 @@
     group: pi
     mode: 0775
 
+- name: Creates log directory
+  become: true
+  file:
+    path: "{{ node_exporter_log_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
 - stat:
     path: "{{ node_exporter_install_path }}/{{ node_exporter_filename }}"
   register: dest
@@ -24,12 +33,11 @@
     src: node.exporter.init.script.j2
     dest: /etc/init.d/{{ node_exporter_service_name }}
     mode: 0755
-  register: initscript
+  notify:
+    - update-rc.d node_exporter
+    - restart node_exporter
 
-- name: update-rc.d node-exporter
-  become: true
-  command: update-rc.d {{ node_exporter_service_name }} defaults
-  when: initscript.changed
+- meta: flush_handlers
 
 - name: Start Node exporter
   become: true

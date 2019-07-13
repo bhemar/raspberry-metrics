@@ -33,6 +33,9 @@
   become: true
   apt:
     deb: "{{ grafana_install_path }}/{{ grafana_filename }}"
+  notify:
+    - Grafana Deamon reload
+    - Restart Grafana
 
 - name: Configure prometheus data source
   become: true
@@ -57,8 +60,11 @@
   copy:
     src: "{{ item }}"
     dest: /var/lib/grafana/dashboards/{{ item }}
+    owner: grafana
+    group: grafana
   with_items:
   - raspberry-metrics-dashboard.json
+  notify: Restart Grafana
 
 - name: Configure dashoard provisioning
   become: true
@@ -68,12 +74,6 @@
   with_items:
   - dashboard-config.yaml
   notify: Restart Grafana
-
-- name: Deamon reload
-  become: true
-  systemd:
-    name: grafana-server
-    daemon_reload: yes
 
 - meta: flush_handlers
 

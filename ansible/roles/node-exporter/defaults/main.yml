@@ -1,4 +1,5 @@
-node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v0.16.0/node_exporter-0.16.0.linux-armv7.tar.gz
-node_exporter_filename: node_exporter-0.16.0.linux-armv7
+node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-armv7.tar.gz
+node_exporter_filename: node_exporter-0.18.1.linux-armv7
 node_exporter_install_path: /opt/node-exporter
 node_exporter_service_name: node-exporter
+node_exporter_log_path: /var/log/node_exporter

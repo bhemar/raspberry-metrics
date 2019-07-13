@@ -1,20 +1,14 @@
 - name: Install Node exporter service
   hosts: hosts
   roles:
-  - { role: 'node-exporter' }
-  tags:
-    - node-exporter
+  - { role: 'node-exporter', tags: 'node-exporter' }
 
 - name: Install Prometheus service
   hosts: hosts
   roles:
-  - { role: 'prometheus' }
-  tags:
-    - prometheus
+  - { role: 'prometheus', tags: 'prometheus' }
 
 - name: Install Grafana service
   hosts: hosts
   roles:
-  - { role: 'grafana' }
-  tags:
-    - grafana
+  - { role: 'grafana', tags: 'grafana' }

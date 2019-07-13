@@ -7,6 +7,15 @@
     group: pi
     mode: 0775
 
+- name: Creates log directory
+  become: true
+  file:
+    path: "{{ prometheus_log_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
 - stat:
     path: "{{ prometheus_install_path }}/{{ prometheus_filename }}"
   register: dest
@@ -23,6 +32,7 @@
     src: prometheus.yml
     dest: "{{ prometheus_install_path }}/{{ prometheus_filename }}/prometheus.yml"
     mode: 0755
+  notify: restart prometheus
 
 - name: Copy Prometheus init script
   become: true
@@ -30,12 +40,11 @@
     src: prometheus.init.script.j2
     dest: /etc/init.d/{{ prometheus_service_name }}
     mode: 0755
-  register: initscript
+  notify:
+    - update-rc.d prometheus
+    - restart prometheus
 
-- name: update-rc.d prometheus
-  become: true
-  command: update-rc.d {{ prometheus_service_name }} defaults
-  when: initscript.changed
+- meta: flush_handlers
 
 - name: Start Prometheus
   become: true

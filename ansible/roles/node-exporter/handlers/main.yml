@@ -1,0 +1,10 @@
+- name: update-rc.d node_exporter
+  become: true
+  command: update-rc.d {{ node_exporter_service_name }} defaults
+
+- name: restart node_exporter
+  become: true
+  service:
+      name: node-exporter
+      state: restarted
+

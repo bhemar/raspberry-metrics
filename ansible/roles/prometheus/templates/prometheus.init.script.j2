@@ -15,8 +15,8 @@ user="pi"
 
 name="{{ prometheus_service_name }}"
 pid_file="/var/run/$name.pid"
-stdout_log="/var/log/$name.log"
-stderr_log="/var/log/$name.err"
+stdout_log="{{ prometheus_log_path }}/$name.log"
+stderr_log="{{ prometheus_log_path }}/$name.err"
 
 get_pid() {
     cat "$pid_file"
