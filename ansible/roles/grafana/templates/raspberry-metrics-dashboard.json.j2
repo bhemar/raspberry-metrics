@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:262",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,6 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1565007847151,
   "links": [],
   "panels": [
     {
@@ -94,7 +96,7 @@
       "targets": [
         {
           "$$hashKey": "object:545",
-          "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+          "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"} - node_memory_MemAvailable_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -162,7 +164,7 @@
       "targets": [
         {
           "$$hashKey": "object:599",
-          "expr": "node_memory_MemTotal_bytes",
+          "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Total memory",
@@ -172,7 +174,7 @@
         },
         {
           "$$hashKey": "object:600",
-          "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+          "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"} - node_memory_MemAvailable_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Used memory",
@@ -266,7 +268,7 @@
       "targets": [
         {
           "$$hashKey": "object:675",
-          "expr": "node_memory_SwapFree_bytes",
+          "expr": "node_memory_SwapFree_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Free",
@@ -392,7 +394,7 @@
       "targets": [
         {
           "$$hashKey": "object:723",
-          "expr": "node_filesystem_size_bytes{device=\"/dev/root\"} - node_filesystem_avail_bytes{device=\"/dev/root\"}",
+          "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"} - node_filesystem_avail_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -458,7 +460,7 @@
       "targets": [
         {
           "$$hashKey": "object:777",
-          "expr": "node_filesystem_size_bytes{device=\"/dev/root\"}",
+          "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -468,7 +470,7 @@
         },
         {
           "$$hashKey": "object:778",
-          "expr": "node_filesystem_size_bytes{device=\"/dev/root\"} - node_filesystem_avail_bytes{device=\"/dev/root\"}",
+          "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"} - node_filesystem_avail_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -562,10 +564,10 @@
       "targets": [
         {
           "$$hashKey": "object:1073",
-          "expr": "process_open_fds",
+          "expr": "sum(process_open_fds{instance=~\"$instance.*\"})",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{job}}",
+          "legendFormat": "Count",
           "metric": "",
           "refId": "A",
           "step": 120
@@ -665,7 +667,7 @@
       "targets": [
         {
           "$$hashKey": "object:1127",
-          "expr": "node_load1",
+          "expr": "node_load1{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Load",
@@ -751,7 +753,7 @@
       "targets": [
         {
           "$$hashKey": "object:1181",
-          "expr": "node_netstat_Tcp_CurrEstab",
+          "expr": "node_netstat_Tcp_CurrEstab{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Count",
@@ -805,10 +807,35 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "{{ groups['main-raspberry'][0] }}",
+          "value": "{{ groups['main-raspberry'][0] }}"
+        },
+        "datasource": "raspberry-prometheus",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": "label_values(instance)",
+        "refresh": 1,
+        "regex": "(.*):.*",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {

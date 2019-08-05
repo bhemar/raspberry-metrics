@@ -7,7 +7,7 @@ Expose raspberry PI metrics using [Grafana](https://grafana.com/) and [Prometheu
 
 ## About ##
 
-Visualise your Raspberry PI metrics. Very easy installation - requires single command.
+Visualise your Raspberry PI metrics. Very easy installation - requires single command. Supports multiple Raspberries.
 
 This project contains [Ansible](https://www.ansible.com/) playbook which installs three services on Raspberry:
 
@@ -34,7 +34,18 @@ If you don't have Ansible installed, see [Ansible installation](http://docs.ansi
 
 Checkout project.
 
-Edit file **ansible/hosts** and set Raspberry IP address.
+Edit file **ansible/hosts** and set Raspberry IP address in **main-raspberry** group. 
+
+If you have more than one Raspberry PI, configure additional Raspberry PI addresses in **additional-raspberries** group.
+
+Here is the example:
+
+![IP_config](./preview/raspberry_IP_config.jpg)
+
+The "main" Raspberry will have all 3 services installed (Prometheus, Node exporter and Grafana), 
+and the "additional Raspberries" will have only Node exporter service installed. 
+
+The main Raspberry will collect metrics from all additional Raspberries (if configured), so they must be accessible from the main Raspberry.
 
 ### 2. Run ansible playbook ###
 
@@ -58,3 +69,7 @@ Or run Ansible playbook with SSH keys authentication:
 * Click on "Raspberry metrics" dashboard:
 
 ![Dashboard](./preview/dashboard.png)
+
+* If you have more than one Raspberry configured, you can select another Raspberry using **instance** dropdown: 
+
+![Instance](./preview/instance.jpg)

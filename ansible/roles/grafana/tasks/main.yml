@@ -57,13 +57,11 @@
 
 - name: Copy example Dashboard
   become: true
-  copy:
-    src: "{{ item }}"
-    dest: /var/lib/grafana/dashboards/{{ item }}
+  template:
+    src: raspberry-metrics-dashboard.json.j2
+    dest: /var/lib/grafana/dashboards/raspberry-metrics-dashboard.json
     owner: grafana
     group: grafana
-  with_items:
-  - raspberry-metrics-dashboard.json
   notify: Restart Grafana
 
 - name: Configure dashoard provisioning
