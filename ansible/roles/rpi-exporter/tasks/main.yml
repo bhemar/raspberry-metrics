@@ -1,0 +1,46 @@
+- name: Creates directory RPi exporter service
+  become: true
+  file:
+    path: "{{ rpi_exporter_install_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
+- name: Creates RPi exporter log directory
+  become: true
+  file:
+    path: "{{ rpi_exporter_log_path }}"
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0775
+
+- stat:
+    path: "{{ rpi_exporter_install_path }}/{{ rpi_exporter_filename }}"
+  register: dest
+
+- name: Download and unarchive RPi exporter package
+  unarchive:
+    src: "{{ rpi_exporter_download_url }}"
+    remote_src: True
+    dest: "{{ rpi_exporter_install_path }}/"
+  when: not dest.stat.exists
+
+- name: Copy RPi exporter init script
+  become: true
+  template:
+    src: rpi.exporter.init.script.j2
+    dest: /etc/init.d/{{ rpi_exporter_service_name }}
+    mode: 0755
+  notify:
+    - update-rc.d rpi_exporter
+    - restart rpi_exporter
+
+- meta: flush_handlers
+
+- name: Start RPi exporter
+  become: true
+  service:
+    name: rpi-exporter
+    state: started

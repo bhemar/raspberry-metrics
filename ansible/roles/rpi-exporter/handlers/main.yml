@@ -1,0 +1,10 @@
+- name: update-rc.d rpi_exporter
+  become: true
+  command: update-rc.d {{ rpi_exporter_service_name }} defaults
+
+- name: restart rpi_exporter
+  become: true
+  service:
+      name: rpi-exporter
+      state: restarted
+

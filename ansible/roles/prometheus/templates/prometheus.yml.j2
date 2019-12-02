@@ -15,6 +15,15 @@ scrape_configs:
       - targets: [
 {% for host in groups['all'] %}
           '{{ host }}:9100'{% if not loop.last %},{% endif %}
+          
+{% endfor %}
+      ]
+          
+  - job_name: 'rpi_exporter'
+    static_configs:
+      - targets: [
+{% for host in groups['all'] %}
+          '{{ host }}:9243'{% if not loop.last %},{% endif %}
 
 {% endfor %}
       ]
