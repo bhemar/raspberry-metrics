@@ -1,0 +1,5 @@
+rpi_exporter_download_url: https://github.com/lukasmalkmus/rpi_exporter/releases/download/v0.6.0/rpi_exporter-0.6.0.linux-armv7.tar.gz
+rpi_exporter_filename: rpi_exporter-0.6.0.linux-armv7
+rpi_exporter_install_path: /opt/rpi-exporter
+rpi_exporter_service_name: rpi-exporter
+rpi_exporter_log_path: /var/log/rpi_exporter

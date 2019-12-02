@@ -1,3 +1,3 @@
-grafana_download_url: https://bintray.com/fg2it/deb-rpi-1b/download_file?file_path=main%2Fg%2Fgrafana_5.1.4_armhf.deb
-grafana_filename: grafana_5.1.4_armhf.deb
+grafana_download_url: https://dl.grafana.com/oss/release/grafana_6.5.1_armhf.deb
+grafana_filename: grafana_6.5.1_armhf.deb
 grafana_install_path: /opt/grafana

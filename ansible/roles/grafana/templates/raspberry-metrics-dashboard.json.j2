@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:262",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,16 +15,176 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1565007847151,
+  "iteration": 1575249153781,
   "links": [],
   "panels": [
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
+      },
+      "id": 27,
+      "panels": [],
+      "title": "CPU",
+      "type": "row"
+    },
+    {
+      "datasource": "raspberry-prometheus",
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 25,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ],
+            "unit": "celsius"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.5.1",
+      "targets": [
+        {
+          "expr": "rpi_cpu_temperature_celsius{instance=~\"$instance.*\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 3,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Temp",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "raspberry-prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 18,
+        "x": 6,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "node_load1{instance=~\"$instance.*\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Load",
+          "refId": "A",
+          "step": 40
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Load",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
       },
       "id": 21,
       "panels": [],
@@ -35,67 +194,51 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(245, 54, 54, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
       "datasource": "raspberry-prometheus",
-      "decimals": null,
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 968212480,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "id": 20,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "max": 968212480,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ],
+            "unit": "decbytes"
+          },
+          "override": {},
+          "values": false
         },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
-      "tableColumn": "",
+      "pluginVersion": "6.5.1",
       "targets": [
         {
-          "$$hashKey": "object:545",
           "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"} - node_memory_MemAvailable_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -104,18 +247,8 @@
           "step": 600
         }
       ],
-      "thresholds": "",
-      "title": "Used memory",
-      "type": "singlestat",
-      "valueFontSize": "70%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "title": "Used Memory",
+      "type": "gauge"
     },
     {
       "aliasColors": {
@@ -128,12 +261,14 @@
       "dashes": false,
       "datasource": "raspberry-prometheus",
       "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 10,
         "x": 6,
-        "y": 1
+        "y": 9
       },
+      "hiddenSeries": false,
       "id": 12,
       "legend": {
         "alignAsTable": false,
@@ -151,8 +286,11 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "minSpan": 8,
+      "maxPerRow": 3,
       "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -163,7 +301,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:599",
           "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -173,7 +310,6 @@
           "step": 60
         },
         {
-          "$$hashKey": "object:600",
           "expr": "node_memory_MemTotal_bytes{instance=~\"$instance.*\"} - node_memory_MemAvailable_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -185,8 +321,9 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Used memory",
+      "title": "Used Memory",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -232,12 +369,14 @@
       "dashes": false,
       "datasource": "raspberry-prometheus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 9
       },
+      "hiddenSeries": false,
       "id": 13,
       "legend": {
         "alignAsTable": false,
@@ -255,8 +394,11 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "minSpan": 8,
+      "maxPerRow": 3,
       "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -267,7 +409,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:675",
           "expr": "node_memory_SwapFree_bytes{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -279,8 +420,9 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Free swap",
+      "title": "Free Swap",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -319,11 +461,12 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 22,
       "panels": [],
@@ -333,67 +476,51 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(245, 54, 54, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
       "datasource": "raspberry-prometheus",
-      "decimals": null,
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 30627827712,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
       "gridPos": {
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 9
+        "y": 17
       },
       "id": 15,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "max": 30627827712,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ],
+            "unit": "decbytes"
+          },
+          "override": {},
+          "values": false
         },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
-      "tableColumn": "",
+      "pluginVersion": "6.5.1",
       "targets": [
         {
-          "$$hashKey": "object:723",
           "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"} - node_filesystem_avail_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -402,18 +529,8 @@
           "step": 600
         }
       ],
-      "thresholds": "",
-      "title": "Used disk",
-      "type": "singlestat",
-      "valueFontSize": "50%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "title": "Used Disk",
+      "type": "gauge"
     },
     {
       "aliasColors": {
@@ -427,12 +544,14 @@
       "dashes": false,
       "datasource": "raspberry-prometheus",
       "fill": 0,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 10,
         "x": 6,
-        "y": 9
+        "y": 17
       },
+      "hiddenSeries": false,
       "id": 7,
       "legend": {
         "alignAsTable": false,
@@ -449,6 +568,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -459,7 +581,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:777",
           "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "hide": false,
@@ -469,7 +590,6 @@
           "step": 60
         },
         {
-          "$$hashKey": "object:778",
           "expr": "node_filesystem_size_bytes{device=\"/dev/root\", instance=~\"$instance.*\"} - node_filesystem_avail_bytes{device=\"/dev/root\", instance=~\"$instance.*\"}",
           "format": "time_series",
           "hide": false,
@@ -481,8 +601,9 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Disk usage",
+      "title": "Disk Usage",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -528,12 +649,14 @@
       "dashes": false,
       "datasource": "raspberry-prometheus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 9
+        "y": 17
       },
+      "hiddenSeries": false,
       "id": 4,
       "legend": {
         "alignAsTable": false,
@@ -551,8 +674,11 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "minSpan": 8,
+      "maxPerRow": 3,
       "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -563,7 +689,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1073",
           "expr": "sum(process_open_fds{instance=~\"$instance.*\"})",
           "format": "time_series",
           "intervalFactor": 2,
@@ -575,8 +700,9 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Open file descriptors",
+      "title": "Open File Descriptors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -615,16 +741,17 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 24
       },
       "id": 23,
       "panels": [],
       "repeat": null,
-      "title": "Other",
+      "title": "Network",
       "type": "row"
     },
     {
@@ -634,100 +761,14 @@
       "dashes": false,
       "datasource": "raspberry-prometheus",
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
-        "w": 16,
+        "w": 24,
         "x": 0,
-        "y": 17
+        "y": 25
       },
-      "id": 10,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "$$hashKey": "object:1127",
-          "expr": "node_load1{instance=~\"$instance.*\"}",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "Load",
-          "refId": "A",
-          "step": 40
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Cpu load",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "raspberry-prometheus",
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 17
-      },
+      "hiddenSeries": false,
       "id": 9,
       "legend": {
         "avg": false,
@@ -742,6 +783,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -752,7 +796,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1181",
           "expr": "node_netstat_Tcp_CurrEstab{instance=~\"$instance.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
@@ -763,8 +806,9 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Number of TCP connections",
+      "title": "Number of TCP Connections",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -803,7 +847,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 16,
+  "schemaVersion": 21,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -811,11 +855,14 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
+          "tags": [
+            
+          ],
           "text": "{{ groups['main-raspberry'][0] }}",
           "value": "{{ groups['main-raspberry'][0] }}"
         },
         "datasource": "raspberry-prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -825,6 +872,7 @@
         "query": "label_values(instance)",
         "refresh": 1,
         "regex": "(.*):.*",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -864,7 +912,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Raspberry metrics",
+  "title": "Raspberry Metrics",
   "uid": "wc_mbnZRz",
-  "version": 1
+  "version": 5
 }

@@ -2,6 +2,11 @@
   hosts: all
   roles:
   - { role: 'node-exporter', tags: 'node-exporter' }
+  
+- name: Install RPi exporter service
+  hosts: all
+  roles:
+  - { role: 'rpi-exporter', tags: 'rpi-exporter' }
 
 - name: Install Prometheus service
   hosts: main-raspberry
