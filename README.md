@@ -11,9 +11,9 @@ Visualise your Raspberry PI metrics. Very easy installation - requires single co
 
 This project contains [Ansible](https://www.ansible.com/) playbook which installs four services on Raspberry:
 
-* [Node exporter](https://github.com/prometheus/node_exporter) - expose Raspberry metrics 
-* [rpi_exporter](https://github.com/lukasmalkmus/rpi_exporter) - expose additional Raspberry metrics 
-* [Prometheus](https://prometheus.io/) - collect and store metrics 
+* [Node exporter](https://github.com/prometheus/node_exporter) - exposes Raspberry metrics
+* [rpi_exporter](https://github.com/lukasmalkmus/rpi_exporter) - exposes CPU temperature as Prometheus metric 
+* [Prometheus](https://prometheus.io/) - collects and stores metrics 
 * [Grafana](https://grafana.com/) - metrics visualization 
 
 ![Scheme](./preview/scheme.jpg)
@@ -21,7 +21,7 @@ This project contains [Ansible](https://www.ansible.com/) playbook which install
 ### Prerequisites ###
 
 * Raspberry PI with ARMv7 processor (Tested on [Raspberry PI 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/))
-* Debian installed on Raspberry (like [Raspbian Jessie](https://www.raspberrypi.org/downloads/raspbian/))
+* Debian installed on Raspberry (like [Raspbian Buster](https://www.raspberrypi.org/downloads/raspbian/))
 * open port 22 on raspberry (SSH)
 * open port 3000 on raspberry (Grafana)
 
