@@ -1,5 +1,5 @@
-prometheus_download_url: https://github.com/prometheus/prometheus/releases/download/v2.15.2/prometheus-2.15.2.linux-armv7.tar.gz
-prometheus_filename: prometheus-2.15.2.linux-armv7
+prometheus_download_url: https://github.com/prometheus/prometheus/releases/download/v2.16.0/prometheus-2.16.0.linux-armv7.tar.gz
+prometheus_filename: prometheus-2.16.0.linux-armv7
 prometheus_install_path: /opt/prometheus
 prometheus_service_name: prometheus
 prometheus_log_path: /var/log/prometheus
